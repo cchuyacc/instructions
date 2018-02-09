@@ -214,7 +214,7 @@ The following steps must be done on the x205ta after installation to provide *ex
 apt -y install git libssl-dev
 
 # Retrieve the Linux kernel source tree fork - will take some time
-git clone https://github.com/plbossart/sound.git -b experimental/codecs
+git clone https://github.com/plbossart/sound.git -b archive/experimental-codecs
 cd sound
 
 # Obtain the kernel config already done - otherwise you will have to run
