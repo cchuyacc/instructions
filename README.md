@@ -1,1 +1,1 @@
-Instructions/how-tos are stored
+Asus X205TA hardware support in Ubuntu!
