@@ -204,6 +204,14 @@ systemctl enable btattach
 ```
 
 ## *EXPERIMENTAL* Kernel changes for audio support
+Add some kernel boot parameters for the grub bootloader to use:
+in the file /etc/default/grub ; append the line:
+    GRUB_CMDLINE_DEFAULT="quiet splash"
+to:
+    GRUB_CMDLINE_DEFAULT="quiet splash intel_idle.max_cstate=1 button.lid_init_state=open"
+    #(intel_idle.max_cstate=1 to prevent freezes)
+    #(button.lid_init_state=open to prevent a suspend loop after closing/opening the lid)
+
 
 安装已经编译好的内核即可。
 sudo wget https://github.com/cchuyacc/instructions/blob/master/X205TA-kernel-sound-64bit.tar
@@ -211,6 +219,7 @@ sudo tar xvf X205TA-kernel-sound-64bit.tar
 sudo ./install-sound-kernel.sh
 
 下面是如何自己编译内核的方法：
+
 #STEP 1: Install prerequisites
 sudo apt-get update && sudo apt-get install -y build-essential fakeroot libncurses5-dev libssl-dev ccache dialog libelf-dev bc ### ubuntu/mint/debian/etc.
 #or
