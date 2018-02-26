@@ -204,13 +204,13 @@ systemctl enable btattach
 ```
 
 ## *EXPERIMENTAL* Kernel changes for audio support
-Add some kernel boot parameters for the grub bootloader to use:
-in the file /etc/default/grub ; append the line:
-    GRUB_CMDLINE_DEFAULT="quiet splash"
-to:
-    GRUB_CMDLINE_DEFAULT="quiet splash intel_idle.max_cstate=1 button.lid_init_state=open"
-    #(intel_idle.max_cstate=1 to prevent freezes)
-    #(button.lid_init_state=open to prevent a suspend loop after closing/opening the lid)
+Add some kernel boot parameters for the grub bootloader to use:  
+in the file /etc/default/grub ; append the line:  
+    GRUB_CMDLINE_DEFAULT="quiet splash"  
+to:  
+    GRUB_CMDLINE_DEFAULT="quiet splash intel_idle.max_cstate=1 button.lid_init_state=open"  
+    #(intel_idle.max_cstate=1 to prevent freezes)  
+    #(button.lid_init_state=open to prevent a suspend loop after closing/opening the lid)  
 
 
 安装已经编译好的内核即可。
