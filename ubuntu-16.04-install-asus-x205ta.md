@@ -165,43 +165,11 @@ Remove the USB flash drive.
 
 ### Installation
 
-Install as normal
+安装已经编译好的内核即可。
+sudo wget https://github.com/cchuyacc/instructions/blob/master/X205TA-kernel-sound-64bit.tar
+sudo tar xvf X205TA-kernel-sound-64bit.tar
+sudo ./install-sound-kernel.sh
 
-*Note: Selecting `Encrypt the new Ubuntu installation for security` will require you to enter a password on boot - the keyboard will not work for this requiring you to use an external USB keyboard. You have been warned.*
-
-## Bluetooth setup
-
-The firmware for the bluetooth hardware needs to be installed and the service started in order to function. The file needed for this is [BCM43341B0.hcd](http://lopaka.github.io/files/instructions/BCM43341B0.hcd)
-
-###Quick note on how firmware file was obtained:
-1. From https://software.intel.com/en-us/iot/hardware/edison/downloads click on **Latest Yocto* Poky image** to download a file similar to `iot-devkit-prof-dev-image-edison-20160606-patch.zip`
-2. Unzip the file and you will find a file called `edison-image-edison.ext4`
-3. Mount this file: `mount edison-image-edison.ext4 /mnt`
-4. The file `/mnt/etc/firmware/bcm43341.hcd` is what we are looking for to be renamed `BCM43341B0.hcd`
-
-###Steps to setup bluetooth
-
-```bash
-# Download firmware file and install it
-wget http://lopaka.github.io/files/instructions/BCM43341B0.hcd -O /lib/firmware/brcm/BCM43341B0.hcd
-
-# Create systemd service file
-cat >/etc/systemd/system/btattach.service <<EOL
-[Unit]
-Description=Btattach
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/btattach --bredr /dev/ttyS1 -P bcm
-ExecStop=/usr/bin/killall btattach
-
-[Install]
-WantedBy=multi-user.target
-EOL
-
-# Enable service
-systemctl enable btattach
-```
 
 ## *EXPERIMENTAL* Kernel changes for audio support
 Add some kernel boot parameters for the grub bootloader to use:  
@@ -213,12 +181,8 @@ to:
     #(button.lid_init_state=open to prevent a suspend loop after closing/opening the lid)  
 
 
-安装已经编译好的内核即可。
-sudo wget https://github.com/cchuyacc/instructions/blob/master/X205TA-kernel-sound-64bit.tar
-sudo tar xvf X205TA-kernel-sound-64bit.tar
-sudo ./install-sound-kernel.sh
 
-下面是如何自己编译内核的方法：
+##下面是如何自己编译内核的方法(完成上面安装即可，下面是自己编译内核的方法介绍)：
 
 #STEP 1: Install prerequisites
 sudo apt-get update && sudo apt-get install -y build-essential fakeroot libncurses5-dev libssl-dev ccache dialog libelf-dev bc ### ubuntu/mint/debian/etc.
